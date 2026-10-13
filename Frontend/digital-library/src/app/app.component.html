@@ -1,0 +1,14 @@
+<div class="app-layout" [class.login-screen]="isLoginPage">
+  @if (!isLoginPage) {
+    <app-header />
+  }
+
+  <div class="app-body">
+    @if (!isLoginPage) {
+      <app-sidebar />
+    }
+    <main class="main-content" [class.login-main]="isLoginPage">
+      <router-outlet />
+    </main>
+  </div>
+</div>

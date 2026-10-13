@@ -1,0 +1,32 @@
+<h1>View Students</h1>
+
+@if (isLoading) {
+  <p role="status">Loading students...</p>
+} @else if (errorMessage) {
+  <p role="alert">{{ errorMessage }}</p>
+} @else {
+<div class="table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Roll No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Branch</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (student of students; track student.id) {
+        <tr>
+          <td>{{ student.rollNo }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.branch }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="3">No students available.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+}

@@ -1,0 +1,106 @@
+<h1>Add Book</h1>
+<form #bookForm="ngForm" (ngSubmit)="submitBook(bookForm)" novalidate>
+  <div class="form-row">
+    <label for="isbn">ISBN Number</label>
+    <div class="field">
+      <input id="isbn" name="isbn" type="text" [(ngModel)]="book.isbn" #isbn="ngModel"
+        required minlength="5" maxlength="50" pattern="[0-9]+">
+      @if (isbn.invalid && (isbn.touched || bookForm.submitted)) {
+        <small>Enter a numeric ISBN with 5 to 50 digits.</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="name">Name</label>
+    <div class="field">
+      <input id="name" name="name" type="text" [(ngModel)]="book.name" #name="ngModel"
+        required minlength="5" maxlength="50" pattern="[A-Za-z ]+">
+      @if (name.invalid && (name.touched || bookForm.submitted)) {
+        <small>Enter a name using letters (5 to 50 characters).</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="author">Author</label>
+    <div class="field">
+      <input id="author" name="author" type="text" [(ngModel)]="book.author" #author="ngModel"
+        required maxlength="50" pattern="[A-Za-z ]+">
+      @if (author.invalid && (author.touched || bookForm.submitted)) {
+        <small>Enter an author using letters (up to 50 characters).</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="publication">Publication</label>
+    <div class="field">
+      <input id="publication" name="publication" type="text" [(ngModel)]="book.publication" #publication="ngModel"
+        required minlength="5" maxlength="50" pattern="[A-Za-z ]+">
+      @if (publication.invalid && (publication.touched || bookForm.submitted)) {
+        <small>Enter a publication using letters (5 to 50 characters).</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row details-row">
+    <label for="details">Details</label>
+    <div class="field">
+      <textarea id="details" name="details" [(ngModel)]="book.details" #details="ngModel"
+        required minlength="5" maxlength="250" pattern="[A-Za-z0-9 ]+"></textarea>
+      @if (details.invalid && (details.touched || bookForm.submitted)) {
+        <small>Enter letters and numbers (5 to 250 characters).</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="quantity">Qty.</label>
+    <div class="field">
+      <input id="quantity" name="quantity" type="number" [(ngModel)]="book.quantity" #quantity="ngModel"
+        required min="1" max="5" step="1">
+      @if (quantity.invalid && (quantity.touched || bookForm.submitted)) {
+        <small>Enter a whole number from 1 to 5.</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="price">Price</label>
+    <div class="field">
+      <input id="price" name="price" type="number" [(ngModel)]="book.price" #price="ngModel" required>
+      @if (price.invalid && (price.touched || bookForm.submitted)) {
+        <small>Enter a numeric price.</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="branch">Branch</label>
+    <div class="field">
+      <select id="branch" name="branch" [(ngModel)]="book.branch" #branch="ngModel" required>
+        <option value="">Select a branch</option>
+        <option value="IT">IT</option>
+        <option value="Civil">Civil</option>
+        <option value="Mechanical">Mechanical</option>
+      </select>
+            @if (branch.invalid && (branch.touched || bookForm.submitted)) {
+        <small>Select a branch.</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row submit-row">
+    <span></span>
+    <button type="submit" [disabled]="isSubmitting">{{ isSubmitting ? 'Saving...' : 'Submit' }}</button>
+  </div>
+
+  @if (errorMessage) {
+    <p class="error-message" role="alert">{{ errorMessage }}</p>
+  }
+
+  @if (successMessage) {
+    <p class="success-message" role="status">{{ successMessage }}</p>
+  }
+</form>

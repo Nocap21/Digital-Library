@@ -1,0 +1,18 @@
+<nav class="sidebar" aria-label="Main navigation">
+  <p class="nav-heading">MENU</p>
+  <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+
+  <p class="nav-heading">BOOKS</p>
+  <a routerLink="/books/add" routerLinkActive="active">Add Book</a>
+  <a routerLink="/books/view" routerLinkActive="active">View Books</a>
+  <a routerLink="/books/delete" routerLinkActive="active">Delete Book</a>
+  <a routerLink="/books/issue" routerLinkActive="active">Issue Book</a>
+  <a routerLink="/books/return" routerLinkActive="active">Return Book</a>
+
+  <p class="nav-heading">STUDENTS</p>
+  <a routerLink="/students/add" routerLinkActive="active">Add Student</a>
+  <a routerLink="/students/view" routerLinkActive="active">View Students</a>
+
+  <p class="nav-heading">OTHER</p>
+  <a routerLink="/report" routerLinkActive="active">Report</a>
+</nav>

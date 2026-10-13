@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-body {
+  flex: 1;
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
+}
+
+.login-screen .app-body {
+  min-height: 100vh;
+}
+
+.login-screen .login-main {
+  padding: 0;
+}
+
+@media (max-width: 640px) {
+  .app-body {
+    flex-direction: column;
+  }
+
+  .main-content {
+    padding: 24px 16px;
+  }
+}

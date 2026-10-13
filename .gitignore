@@ -1,0 +1,42 @@
+# Node and Angular output
+**/node_modules/
+**/dist/
+**/.angular/
+
+# .NET build output
+**/bin/
+**/obj/
+
+# Local environment and secret files
+**/.env
+**/.env.*
+!**/.env.example
+**/secrets*.json
+**/appsettings.*.local.json
+**/appsettings.*.Local.json
+**/*.user
+**/*.suo
+
+# IDE and editor files
+.vs/
+**/.vscode/*
+!**/.vscode/extensions.json
+.idea/
+
+# Logs and temporary files
+**/*.log
+**/Temp/
+**/tmp/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Local database files
+**/*.mdf
+**/*.ldf
+
+
+Backend/DigitalLibrary.API/appsettings.Development.json
+
+Backend/DigitalLibrary.API/Properties/launchSettings.json

@@ -1,0 +1,54 @@
+<h1>Add Student</h1>
+
+<form #studentForm="ngForm" (ngSubmit)="submitStudent(studentForm)" novalidate>
+  <div class="form-row">
+    <label for="rollNo">Roll No.</label>
+    <div class="field">
+      <input id="rollNo" name="rollNo" type="text" [(ngModel)]="student.rollNo" #rollNo="ngModel" required>
+      @if (rollNo.invalid && (rollNo.touched || studentForm.submitted)) {
+        <small>Roll No. is required.</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="name">Name</label>
+    <div class="field">
+      <input id="name" name="name" type="text" [(ngModel)]="student.name" #name="ngModel" required>
+      @if (name.invalid && (name.touched || studentForm.submitted)) {
+        <small>Name is required.</small>
+      }
+    </div>
+  </div>
+
+
+
+
+  <div class="form-row">
+    <label for="branch">Branch</label>
+    <div class="field">
+      <select id="branch" name="branch" [(ngModel)]="student.branch" #branch="ngModel" required>
+        <option value="">Select a branch</option>
+        @for (option of branches; track option) {
+          <option [value]="option">{{ option }}</option>
+        }
+      </select>
+      @if (branch.invalid && (branch.touched || studentForm.submitted)) {
+        <small>Branch is required.</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row submit-row">
+    <span></span>
+    <button type="submit" [disabled]="isSubmitting">{{ isSubmitting ? 'Saving...' : 'Submit' }}</button>
+  </div>
+
+  @if (errorMessage) {
+    <p class="error-message" role="alert">{{ errorMessage }}</p>
+  }
+
+  @if (successMessage) {
+    <p class="success-message" role="status">{{ successMessage }}</p>
+  }
+</form>

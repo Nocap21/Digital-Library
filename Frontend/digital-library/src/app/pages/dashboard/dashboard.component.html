@@ -1,0 +1,93 @@
+<h1 class="dashboard-title">Dashboard</h1>
+
+<div class="dashboard-content">
+  @if (isLoading) {
+    <p role="status">Loading dashboard...</p>
+  } @else if (errorMessage) {
+    <p role="alert">{{ errorMessage }}</p>
+  } @else if (dashboard) {
+    <section class="summary-stats" aria-label="Library totals">
+      <div><span>Total Books</span><strong>{{ dashboard.totalBooks }}</strong></div>
+      <div><span>Total Students</span><strong>{{ dashboard.totalStudents }}</strong></div>
+      <div><span>Currently Issued</span><strong>{{ dashboard.currentlyIssuedBooks }}</strong></div>
+      <div><span>Available Copies</span><strong>{{ dashboard.availableCopies }}</strong></div>
+    </section>
+
+    @if (issuedBooks.length === 0) {
+      <section class="issued-books-section" aria-labelledby="issued-books-title">
+        <h2 id="issued-books-title">Issued Book Summary</h2>
+        <p class="empty-state" role="status">No books are currently issued.</p>
+      </section>
+    } @else {
+      <section class="chart-grid" aria-label="Book summary charts">
+        <div class="chart-panel">
+          <h2>No. Of Books</h2>
+          <p class="chart-legend"><span class="legend-swatch bar-swatch"></span>No. Of Books</p>
+
+          <div class="bar-chart" aria-label="Number of books by student">
+            @for (person of peopleStatistics; track person.rollNo) {
+              <div class="bar-column">
+                <div class="bar-track">
+                  <div class="bar" [style.height.%]="(person.bookCount / maximumBookCount) * 100">
+                    <span>{{ person.bookCount }}</span>
+                  </div>
+                </div>
+                <span class="person-name">{{ person.name }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="chart-panel pie-panel">
+          <h2>No. Of Books</h2>
+          <svg class="pie-chart" viewBox="0 0 200 200" role="img" aria-labelledby="pie-title">
+            <title id="pie-title">No. Of Books by Student</title>
+            @for (person of peopleStatistics; track person.rollNo) {
+              <path [attr.d]="person.piePath" [attr.fill]="person.color"></path>
+              <text class="pie-label" [attr.x]="person.labelX" [attr.y]="person.labelY">{{ person.percentage }}%</text>
+            }
+          </svg>
+
+          <ul class="pie-legend" aria-label="Students in the book count chart">
+            @for (person of peopleStatistics; track person.rollNo) {
+              <li>
+                <span class="legend-swatch" [style.background-color]="person.color"></span>
+                {{ person.name }} ({{ person.bookCount }})
+              </li>
+            }
+          </ul>
+        </div>
+      </section>
+
+      <section class="issued-books-section" aria-labelledby="issued-books-title">
+        <h2 id="issued-books-title">Issued Book Summary</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">ISBN</th>
+                <th scope="col">Book Name</th>
+                <th scope="col">Author</th>
+                <th scope="col">Roll No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Issued On</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (book of issuedBooks; track book.id) {
+                <tr>
+                  <td>{{ book.isbn }}</td>
+                  <td>{{ book.bookName }}</td>
+                  <td>{{ book.author }}</td>
+                  <td>{{ book.rollNo }}</td>
+                  <td>{{ book.studentName }}</td>
+                  <td>{{ book.issuedOn }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    }
+  }
+</div>

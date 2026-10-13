@@ -1,0 +1,96 @@
+:host {
+  min-height: 100vh;
+  padding: 24px 16px;
+  display: grid;
+  place-items: center;
+}
+
+.login-page {
+  width: min(100%, 520px);
+}
+
+h1 {
+  margin: 0 0 32px;
+  color: #2f5597;
+  font-size: 42px;
+  font-weight: 400;
+  text-align: center;
+}
+
+form {
+  display: grid;
+  gap: 22px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+label {
+  color: #000;
+}
+
+input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid #2f5597;
+  border-radius: 0;
+  background: #fff;
+  color: #000;
+  font: inherit;
+}
+
+input:focus {
+  outline: 2px solid #4472c4;
+  outline-offset: 2px;
+}
+
+input[aria-invalid="true"] {
+  border-color: #b42318;
+}
+
+.validation-message {
+  color: #b42318;
+  font-size: 16px;
+}
+
+button {
+  min-height: 48px;
+  border: 1px solid #2f5597;
+  border-radius: 0;
+  background: #4472c4;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2f5597;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.error-message {
+  margin: 0;
+  color: #b42318;
+}
+
+button:focus-visible {
+  outline: 2px solid #2f5597;
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 34px;
+  }
+
+  form {
+    gap: 18px;
+  }
+}

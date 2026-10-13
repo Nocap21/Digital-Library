@@ -1,0 +1,48 @@
+<section class="login-page" aria-labelledby="login-title">
+  <h1 id="login-title">Digital Library</h1>
+
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+    <div class="form-field">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="text"
+        placeholder="Enter your username"
+        autocomplete="username"
+        required
+        ngModel
+        #usernameField="ngModel"
+        [attr.aria-invalid]="usernameField.invalid && (usernameField.touched || submitted)"
+        aria-describedby="username-error"
+      >
+      @if (usernameField.invalid && (usernameField.touched || submitted)) {
+        <p class="validation-message" id="username-error">Username is required.</p>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+        required
+        ngModel
+        #passwordField="ngModel"
+        [attr.aria-invalid]="passwordField.invalid && (passwordField.touched || submitted)"
+        aria-describedby="password-error"
+      >
+      @if (passwordField.invalid && (passwordField.touched || submitted)) {
+        <p class="validation-message" id="password-error">Password is required.</p>
+      }
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting">{{ isSubmitting ? 'Signing in...' : 'Login' }}</button>
+    @if (errorMessage) {
+      <p class="error-message" role="alert">{{ errorMessage }}</p>
+    }
+  </form>
+</section>

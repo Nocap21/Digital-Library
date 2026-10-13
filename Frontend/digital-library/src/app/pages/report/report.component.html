@@ -1,0 +1,40 @@
+<h1>Report</h1>
+
+@if (isLoading) {
+  <p role="status">Loading report...</p>
+} @else if (errorMessage) {
+  <p role="alert">{{ errorMessage }}</p>
+} @else if (issues.length === 0) {
+  <p role="status">No records found.</p>
+} @else {
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">ISBN</th>
+          <th scope="col">Book Name</th>
+          <th scope="col">Author</th>
+          <th scope="col">Roll No.</th>
+          <th scope="col">Name</th>
+          <th scope="col">Student Branch</th>
+          <th scope="col">Issued On</th>
+          <th scope="col">Returned On</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (issue of issues; track issue.id) {
+          <tr>
+            <td>{{ issue.isbn }}</td>
+            <td>{{ issue.bookName }}</td>
+            <td>{{ issue.author }}</td>
+            <td>{{ issue.rollNo }}</td>
+            <td>{{ issue.studentName }}</td>
+            <td>{{ issue.studentBranch }}</td>
+            <td>{{ issue.issuedOn }}</td>
+            <td>{{ issue.returnedOn ?? 'Active' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

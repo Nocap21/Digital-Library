@@ -1,0 +1,58 @@
+<h1>Issue Book</h1>
+
+@if (isLoading) {
+  <p class="notice" role="status">Loading books and students...</p>
+} @else if (errorMessage && !availableBooks.length && !students.length) {
+  <p class="error-message" role="alert">{{ errorMessage }}</p>
+} @else if (availableBooks.length === 0) {
+  <p class="notice" role="status">No books are currently available.</p>
+}
+
+@if (students.length === 0) {
+  <p class="notice" role="status">Add a student before issuing a book.</p>
+}
+
+<form #issueForm="ngForm" (ngSubmit)="submitIssue(issueForm)" novalidate>
+  <div class="form-row">
+    <label for="bookIsbn">Book</label>
+    <div class="field">
+      <select id="bookIsbn" name="bookIsbn" [(ngModel)]="selectedBookId" #bookIsbn="ngModel" required>
+        <option value="">Select a book</option>
+        @for (book of availableBooks; track book.isbn) {
+          <option [ngValue]="book.id">{{ book.name }} ({{ book.isbn }}) - Qty. {{ book.quantity }}</option>
+        }
+      </select>
+      @if (bookIsbn.invalid && (bookIsbn.touched || issueForm.submitted)) {
+        <small>Select a book.</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="rollNo">Student</label>
+    <div class="field">
+      <select id="rollNo" name="rollNo" [(ngModel)]="selectedStudentId" #rollNo="ngModel" required>
+        <option value="">Select a student</option>
+        @for (student of students; track student.rollNo) {
+          <option [ngValue]="student.id">{{ student.rollNo }} - {{ student.name }}</option>
+        }
+      </select>
+      @if (rollNo.invalid && (rollNo.touched || issueForm.submitted)) {
+        <small>Select a student.</small>
+      }
+    </div>
+  </div>
+
+  <div class="form-row submit-row">
+    <span></span>
+    <button type="submit" [disabled]="isLoading || isSubmitting || availableBooks.length === 0 || students.length === 0">{{ isSubmitting ? 'Issuing...' : 'Issue Book' }}</button>
+  </div>
+
+  @if (errorMessage) {
+    <p class="error-message" role="alert">{{ errorMessage }}</p>
+  }
+
+  @if (successMessage) {
+    <p class="success-message" role="status">{{ successMessage }}</p>
+  }
+</form>

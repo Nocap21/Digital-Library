@@ -1,0 +1,42 @@
+<h1>Delete Book</h1>
+@if (successMessage) {
+  <p role="status">{{ successMessage }}</p>
+}
+@if (isLoading) {
+  <p role="status">Loading books...</p>
+} @else if (errorMessage) {
+  <p role="alert">{{ errorMessage }}</p>
+} @else {
+<div class="table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>ISBN</th>
+        <th>Book Name</th>
+        <th>Author</th>
+        <th>Publication</th>
+        <th>Qty.</th>
+        <th>Price</th>
+        <th>Branch</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (book of books; track book.id) {
+        <tr>
+          <td>{{ book.isbn }}</td>
+          <td>{{ book.name }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.publication }}</td>
+          <td>{{ book.quantity }}</td>
+          <td>{{ book.price }}</td>
+          <td>{{ book.branch }}</td>
+          <td><button type="button" [disabled]="deletingId !== null" (click)="deleteBook(book)">{{ deletingId === book.id ? 'Deleting...' : 'Delete' }}</button></td>
+        </tr>
+      } @empty {
+        <tr><td colspan="8">No books found.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>
+}

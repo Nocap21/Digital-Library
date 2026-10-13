@@ -1,0 +1,6 @@
+@DigitalLibrary.API_HostAddress = http://localhost:5018
+
+GET {{DigitalLibrary.API_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###

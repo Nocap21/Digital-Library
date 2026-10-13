@@ -1,0 +1,36 @@
+.app-header {
+  min-height: 64px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: #2f5597;
+  color: white;
+}
+
+.brand {
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-link {
+  border: 0;
+  background: transparent;
+  color: white;
+  padding: 8px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.login-link:hover {
+  background: #4472c4;
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding: 0 16px;
+  }
+}

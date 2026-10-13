@@ -1,0 +1,44 @@
+<h1>Return Book</h1>
+
+@if (successMessage) {
+  <p class="success-message" role="status">{{ successMessage }}</p>
+}
+
+@if (errorMessage) {
+  <p class="error-message" role="alert">{{ errorMessage }}</p>
+}
+
+@if (isLoading) {
+  <p role="status">Loading issue history...</p>
+} @else if (activeIssues.length === 0) {
+  <p>No books are currently issued.</p>
+} @else {
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>ISBN</th>
+          <th>Book Name</th>
+          <th>Author</th>
+          <th>Roll No.</th>
+          <th>Name</th>
+          <th>Issued On</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (issuedBook of activeIssues; track issuedBook.id) {
+          <tr>
+            <td>{{ issuedBook.isbn }}</td>
+            <td>{{ issuedBook.bookName }}</td>
+            <td>{{ issuedBook.author }}</td>
+            <td>{{ issuedBook.rollNo }}</td>
+            <td>{{ issuedBook.studentName }}</td>
+            <td>{{ issuedBook.issuedOn }}</td>
+            <td><button type="button" [disabled]="returningId !== null" (click)="returnBook(issuedBook)">{{ returningId === issuedBook.id ? 'Returning...' : 'Return' }}</button></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
